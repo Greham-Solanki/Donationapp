@@ -6,29 +6,47 @@ const DonationForm = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
+  const [image, setImage] = useState(null); // State to hold the uploaded image
   const [message, setMessage] = useState(''); // State to hold success or error message
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]); // Set the selected image file
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Get the JWT token from local storage
     const token = localStorage.getItem('token');
+    console.log("Client-side token:", token);
+    if (!token) {
+      console.error('No token found');
+      setMessage('No token found. Please log in again.');
+      return;
+    }
+
+    // Create a FormData object to handle text and file data together
+    const formData = new FormData();
+    formData.append('itemName', itemName);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('location', location);
+    if (image) {
+      formData.append('image', image); // Append the image file if it exists
+    }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/donations/donate', 
-        {
-          itemName, 
-          description, 
-          category, 
-          location
-        }, 
+      const response = await axios.post(
+        'http://localhost:5000/api/donations/donate',
+        formData,
         {
           headers: {
-            Authorization: `Bearer ${token}` // Include token in the request
+            'Authorization': `Bearer ${token}`, // Include token in the request
+            'Content-Type': 'multipart/form-data', // Set content type for file upload
           }
         }
       );
-      console.log(response.data);
+
       console.log('Donation submitted:', response.data);
       setMessage('Donation submitted successfully!'); // Set success message
       // Clear form fields
@@ -36,9 +54,11 @@ const DonationForm = () => {
       setDescription('');
       setCategory('');
       setLocation('');
+      setImage(null); // Reset image state
     } catch (error) {
       console.error('Error submitting donation:', error);
-      setMessage('Error submitting donation. Please try again.'); // Set error message
+      const errorMessage = error.response?.data?.msg || 'Error submitting donation. Please try again.';
+      setMessage(errorMessage); // Set error message based on server response
     }
   };
 
@@ -72,6 +92,11 @@ const DonationForm = () => {
         value={location} 
         onChange={(e) => setLocation(e.target.value)} 
         required 
+      />
+      <input 
+        type="file" 
+        accept="image/*" 
+        onChange={handleImageChange} 
       />
       <button type="submit">Submit Donation</button>
       {message && <p>{message}</p>} {/* Display success or error message */}

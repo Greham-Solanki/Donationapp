@@ -1,0 +1,80 @@
+/* ChatPage.css */
+
+.chat-page {
+  display: flex;
+  height: 100vh;
+}
+
+.chat-list {
+  width: 30%;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+.chat-messages {
+  width: 70%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chat-item {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.chat-item.active {
+  background-color: #e0e0e0;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column; /* Ensures new messages are at the bottom */
+  max-height: 80vh; /* Add a height constraint to enable scrolling */
+}
+
+.message {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  max-width: 70%; /* Limit message width */
+}
+
+.message.own {
+  background-color: #d1ffd6;
+  align-self: flex-end; /* Align own messages to the right */
+}
+
+.message.received {
+  background-color: #f0f0f0;
+  align-self: flex-start; /* Align received messages to the left */
+}
+
+.message-input {
+  display: flex;
+  align-items: center;
+}
+
+.message-input input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.message-input button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.message-input button:hover {
+  background-color: #0056b3;
+}

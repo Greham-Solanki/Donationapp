@@ -42,6 +42,7 @@ const Profile = ({ user }) => {
       <h2>User Profile</h2>
       {profileData ? (
         <div>
+          <p><strong>Name:</strong> {profileData.name}</p>
           <p><strong>Email:</strong> {profileData.email}</p>
           <p><strong>User Type:</strong> {profileData.userType}</p>
           {/* Add other user profile fields here */}

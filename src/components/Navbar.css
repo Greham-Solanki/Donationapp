@@ -1,0 +1,31 @@
+/* src/components/Navbar.css */
+
+nav {
+    background-color: #4CAF50; /* Green background */
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around; /* Space out nav items */
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline;
+  }
+  
+  nav a {
+    color: white; /* White text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+  }
+  
+  nav a:hover {
+    background-color: #45a049; /* Darker green on hover */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
