@@ -1,19 +1,33 @@
 # Build stage
-FROM node:16 AS builder
+FROM node:16
+
+# Set working directory
 WORKDIR /app
-# Copy only package files first for better caching
+
+# Copy package files first
 COPY package*.json ./
+
+# Install global and local dependencies with proper permissions
+RUN npm install -g react-scripts
 RUN npm install
-# Copy the rest of the application
+
+# Copy all project files
 COPY . .
-# Build the frontend
+
+# Ensure correct file permissions
+RUN chmod +x ./node_modules/.bin/react-scripts
+
+# Build the project
 RUN npm run build
 
 # Serve stage
 FROM nginx:alpine
-# Copy built files from the builder stage
-COPY --from=builder /app/build /usr/share/nginx/html
-# Optional: If you have a custom nginx configuration
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy build files from previous stage
+COPY --from=0 /app/build /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
+
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
