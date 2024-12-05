@@ -25,6 +25,15 @@ const ProtectedRoute = ({ element, isAuthenticated, userType, requiredType }) =>
   return element;
 };
 
+const healthCheck = async () => {
+  try {
+    const response = await fetch('/health');
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+};
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
