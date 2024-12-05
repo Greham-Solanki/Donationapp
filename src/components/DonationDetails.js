@@ -17,7 +17,7 @@ const DonationDetails = ({ currentUserId, setDonationId }) => {
     // Fetch donation details from the server
     const fetchDonationDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/donations/${donationId}`);
+        const response = await axios.get(`http://backend-alb-366726698.us-east-1.elb.amazonaws.com:5000/api/donations/${donationId}`);
         console.log("Donation data:", response.data);
         setDonation(response.data);
       } catch (error) {
