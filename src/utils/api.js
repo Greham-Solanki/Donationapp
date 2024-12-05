@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000', // Your API base URL
+  baseURL: 'http://backend-alb-366726698.us-east-1.elb.amazonaws.com', // Your API base URL
   timeout: 10000, // Set a timeout for requests
 });
 
