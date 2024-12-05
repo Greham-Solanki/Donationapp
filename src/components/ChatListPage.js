@@ -12,7 +12,7 @@ const ChatListPage = ({ currentUserId }) => {
   useEffect(() => {
     const fetchChatGroups = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/chats/user/${currentUserId}`); // Update API call
+        const response = await axios.get(`http://backend-alb-366726698.us-east-1.elb.amazonaws.com:5000/api/chats/user/${currentUserId}`); // Update API call
         setChatGroups(response.data); // Assuming response contains chatGroups
       } catch (err) {
         console.error("Error fetching chat groups:", err);
