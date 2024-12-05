@@ -25,6 +25,10 @@ const ProtectedRoute = ({ element, isAuthenticated, userType, requiredType }) =>
   return element;
 };
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 const healthCheck = async () => {
   try {
     const response = await fetch('/health');
