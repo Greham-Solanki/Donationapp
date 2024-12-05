@@ -11,7 +11,7 @@ const DonationList = ({ currentUserId, userType }) => {
     const fetchDonations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/donations', {
+        const response = await axios.get('http://backend-alb-366726698.us-east-1.elb.amazonaws.com/api/donations', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
