@@ -16,7 +16,7 @@ const Login = ({ onLogin }) => {
 
     try {
       // Make the API call to log in
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('http://backend-alb-366726698.us-east-1.elb.amazonaws.com:5000/api/auth/login', { email, password });
 
       // Store the token in local storage
       localStorage.setItem('token', response.data.token);
