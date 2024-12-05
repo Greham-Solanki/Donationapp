@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, userType });
+      const response = await axios.post('http://backend-alb-366726698.us-east-1.elb.amazonaws.com:5000/api/auth/register', { name, email, password, userType });
       console.log(response.data);
       navigate('/login'); // Navigate to login after registration
     } catch (error) {
