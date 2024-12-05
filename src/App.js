@@ -50,7 +50,7 @@ const App = () => {
   }, []);
 
   // Initialize socket only when user is authenticated
-  const socket = user ? io('http://localhost:5000', { query: { userId: user.id } }) : null;
+  const socket = user ? io('http://backend-alb-366726698.us-east-1.elb.amazonaws.com:5000', { query: { userId: user.id } }) : null;
 
   useEffect(() => {
     if (!socket) return;
