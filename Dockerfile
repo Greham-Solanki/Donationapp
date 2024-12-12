@@ -1,5 +1,6 @@
-# Build stage
-FROM node:16
+FROM public.ecr.aws/docker/library/node:16
+FROM public.ecr.aws/docker/library/nginx:alpine
+
 
 # Set working directory
 WORKDIR /app
@@ -20,8 +21,6 @@ RUN chmod +x ./node_modules/.bin/react-scripts
 # Build the project
 RUN npm run build
 
-# Serve stage
-FROM nginx:alpine
 
 # Copy build files from previous stage
 COPY --from=0 /app/build /usr/share/nginx/html
