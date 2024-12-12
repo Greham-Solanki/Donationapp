@@ -10,7 +10,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t backend-app:latest .
+      - docker build -t frontend-app:latest .
       - docker tag backend-app:latest public.ecr.aws/767397745665/capstone/frontend-app:latest
 
   post_build:
