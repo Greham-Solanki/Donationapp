@@ -1,15 +1,18 @@
 version: 0.2
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR Public...
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u9j3n1n7
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t public.ecr.aws/767397745665/capstone/frontend-app:latest .
-      - docker tag public.ecr.aws/767397745665/capstone/frontend-app:latest public.ecr.aws/767397745665/capstone/frontend-app:latest
+      - docker build -t backend-app:latest .
+      - docker tag backend-app:latest public.ecr.aws/767397745665/capstone/frontend-app:latest
+
   post_build:
     commands:
       - echo Build completed on `date`
